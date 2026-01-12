@@ -357,7 +357,6 @@
 
     .conv-card {
       h3 {
-        max-width: 60%;
         max-height: 2rem;
         overflow: hidden;
         text-overflow: ellipsis;

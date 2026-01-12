@@ -1,28 +1,39 @@
 # CARNET DE BORD DU PROJET
+
 ## Jour 1 : Wireframe et intégration HTML/CSS dans Svelte
 
 ### Todo List :
-- [X] Mettre en place le carnet de bord
-- [X] Faire une pige de style
-- [X] Prepa du fichier pour portfolio
-- [X] Relire le cachier des charges
-- [X] Créer le wireframe (max 1h30)
-- [X] Mettre en place le projet Svelte (30min)
-- [ ] Intégrér l'UI en mobile first (4h)
-- [ ] Push version du fichier pour Portfolio
 
-
+* [x] Mettre en place le carnet de bord
+* [x] Faire une pige de style
+* [x] Prépa du fichier pour portfolio
+* [x] Relire le cahier des charges
+* [x] Créer le wireframe (max 1h30)
+* [x] Mettre en place le projet Svelte (30 min)
+* [x] Intégrer l'UI en mobile first (4h)
+* [ ] Push version du fichier pour le portfolio
 
 ### Bilan de fin de journée :
+
 #### Ce que je n'ai pas réussi à faire
-Gérer l'agrandissement automatique du champs texte de conversation sur les versions mobile et tablette afin qu'elle s'agrandissent suivant le texte tapé. Puis qu'elle se fixe a une autre max de 4 lignes par exemples.
+
+* Gérer l'agrandissement automatique du champ texte de conversation sur les versions mobile et tablette afin qu'il s'agrandisse suivant le texte tapé, puis qu'il se fixe à un max de 4 lignes par exemple.
+* Faire toutes les intégrations cliquables du site.
 
 #### Les choix que j'ai faits
-J'ai passé un peu plus de temps que prévu sur la maquette, bien qu'en ayant utilisé un template.
-Prévu 1h30 max, j'y ai passé 2h30
-Je pensais être plus rapide sur cet aspect mais cela m'a permis de comprendre un peu mieux Figma
+
+* J'ai passé un peu plus de temps que prévu sur la maquette, bien qu'en ayant utilisé un template.
+  Prévu 1h30 max, j'y ai passé 2h30.
+  Je pensais être plus rapide sur cet aspect, mais cela m'a permis de comprendre un peu mieux Figma.
+
+* Graphiquement, j'ai un peu adapté le style pendant la phase d'intégration vs les maquettes prévues, parce que plus homogène selon moi au final, et pour essayer de gagner un peu de temps.
 
 #### Ce que tu referais différemment
 
+* Partir sur vraiment quelque chose de simple et épuré graphiquement pour d'abord mettre en place l'aspect fonctionnel, puis faire le style.
 
 #### Les prochaines étapes si tu avais eu plus de temps
+
+* Mieux gérer la version desktop.
+* Cleaner mon fichier Svelte pour faire des modules pour chaque zone du site.
+* Faire toute la partie interactions.
