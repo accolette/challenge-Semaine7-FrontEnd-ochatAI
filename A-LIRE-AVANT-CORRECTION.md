@@ -15,7 +15,7 @@
 
 ### Bilan de fin de journée :
 #### Ce que je n'ai pas réussi à faire
-
+Gérer l'agrandissement automatique du champs texte de conversation sur les versions mobile et tablette afin qu'elle s'agrandissent suivant le texte tapé. Puis qu'elle se fixe a une autre max de 4 lignes par exemples.
 
 #### Les choix que j'ai faits
 J'ai passé un peu plus de temps que prévu sur la maquette, bien qu'en ayant utilisé un template.

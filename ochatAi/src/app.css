@@ -5,9 +5,15 @@
   font-family: "Bricolage Grotesque", "Nunito", Avenir, Helvetica, Arial,
     sans-serif;
   font-size: 16px;
+
+  --primarycolor: #612a74;
+  --secondarycolor: #e8a089;
+  --lightcolor: #ffffff;
+  --darkcolor: #000000;
+  --bgcolor: #f3eee9;
 }
 
-/* RESET CSS */
+/* ! ****************************** RESET CSS ****************************** ! */
 /* 1. Use a more-intuitive box-sizing model */
 *,
 *::before,
@@ -85,7 +91,7 @@ h6 {
   isolation: isolate;
 }
 
-/* STYLES GLOBAUX */
+/* ! ****************************** GLOBALS STYLES ****************************** ! */
 
 h1 {
   font-family: "Bricolage Grotesque", sans-serif;
@@ -98,4 +104,46 @@ h5,
 h6,
 p {
   font-family: "Nunito", sans-serif;
+}
+
+button {
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  background: none;
+  border-radius: 17% 28% 6% 17% / 39% 59% 17% 40%;
+}
+
+#appIcon {
+  color: var(--primarycolor);
+  display: inline;
+}
+
+em {
+  color: var(--primarycolor);
+  font-style: normal;
+}
+
+input,
+textarea {
+  border: rgb(181, 181, 181) solid 1px;
+  border-radius: 1rem;
+  padding: 0.2rem 0.7rem;
+  overflow: auto;
+  resize: none;
+}
+
+/* *************************** HEADER PART *************************** */
+header {
+  background-color: var(--bgcolor);
+}
+
+/* *************************** MAIN PART *************************** */
+main {
+  background-color: var(--lightcolor);
+}
+
+/* *************************** ASIDE PART *************************** */
+aside {
+  background-color: var(--bgcolor);
 }
