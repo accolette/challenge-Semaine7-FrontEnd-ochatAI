@@ -119,6 +119,10 @@ button {
   display: inline;
 }
 
+.search-icon {
+  color: rgb(130, 130, 130);
+}
+
 em {
   color: var(--primarycolor);
   font-style: normal;
@@ -126,11 +130,12 @@ em {
 
 input,
 textarea {
-  border: rgb(181, 181, 181) solid 1px;
+  border: rgb(180, 180, 180) solid 1px;
   border-radius: 1rem;
   padding: 0.2rem 0.7rem;
   overflow: auto;
   resize: none;
+  background: none;
 }
 
 /* *************************** HEADER PART *************************** */
