@@ -44,42 +44,53 @@
 
 ### Todo List :
 
-* [X] Todo de la journée avec durées objectivées sur 6h au total
-* [ ] Finir d'intégrer l'UI en mobile first (1h15)  
-Sous taches sur l'intégration : 
-* [X] Favicon
-* [X] Intégration partie chat
+* [x] Todo de la journée avec durées objectivées sur 6 h au total
+* [ ] Finir d'intégrer l'UI en mobile first (1 h 15)  
+> Sous-tâches sur l'intégration :
+* [x] Favicon
+* [x] Intégration partie chat
 * [ ] Menus cliquables
-* [ ] Modal de login à l'arrivée
-* [ ] Revoir style Btn nouveau chat
-* [ ] Bonus : Dispacher le fichier en composants  
-Puis :
-* [X] Mettre le token dans un fichier dédié et tout de suite faire un gitignore la dessus
-* [X] Etape 2 : Lier l'AP a Mistrail AI (1h30)
-* [X] Gérer les réponses et erreurs éventuelles
-* [X] Etape 3: Gérer un affichage differentié entre user et IA (1h30h)
-* [X] Cleaner systeme de tableau étape 3
-* [X] Reset champ de saisie
-* [ ] Etape 4: Securiser le Mistral Token (1h)
-* [ ] Bonus : usage emarkdown (30min)
-* [ ] Remplir le carnet de bord (15min)
-* [ ] Push version du fichier pour le portfolio
+* [X] Modal de login à l'arrivée
+* [ ] Revoir le style du bouton « nouveau chat »
+* [ ] Bonus : Dispatcher le fichier en composants   
+> Puis :
+* [x] Mettre le token dans un fichier dédié et faire immédiatement un .gitignore dessus
+* [x] Étape 2 : Lier l'API à Mistral AI (1 h 30)
+* [x] Gérer les réponses et erreurs éventuelles
+* [x] Étape 3 : Gérer un affichage différencié entre user et IA (1 h 30)
+* [x] Nettoyer le système de tableau — étape 3
+* [x] Reset du champ de saisie
+* [X] Étape 4 : Sécuriser le token Mistral (1 h)
+* [ ] Bonus : usage eMarkdown (30 min)
+* [X] Remplir le carnet de bord (15 min)
+* [ ] Push la version du fichier pour le portfolio
 
-### Bilan de fin de journée :
-#### Ce que j'ai réussi à faire
+### Bilan de fin de journée
+#### Ce que j'ai réussi à faire :
+* Avancer sur l'intégration manquante de la partie chat
+* Lier le tout à l'API de Mistral
+* Faire le style du chat pour differentier les messages
+* Faire l'usage du tokken sans le faire apparaitre dans le code (enfin sauf erreur de ma part)
 
 #### Ce que je n'ai pas réussi à faire
-
+* Les zones cliquables du header et de l'historique n'ont pas été traité du tout
+* L'affichage de l'heure d'envoi des messages
+* Faire en sorte que l'on soit toujours du scroll dans la zone du chat
 
 #### Les choix que j'ai faits
-* J'ai commencé a regarder aux interaction notamment pour reduire la zone historique : j'ai abandonné car je perdais trop de temps.
+
+* J'ai commencé à regarder les interactions, notamment pour réduire la zone d'historique : j'ai abandonné car je perdais trop de temps.
 
 #### Ce que tu referais différemment
 
-
-
 #### Les prochaines étapes si tu avais eu plus de temps
-* gerer le entrer au clavier pour envoyer le message
-* Gerer l'affichae de l'heure d'envoie du message
-* un symbole de chargment le temps qu ele serveur reponde
-* Faire que l'on soit oujours en bas dans le scroll bar du chat
+* Gérer la touche Entrée au clavier pour envoyer le message
+* Gérer l'affichage de l'heure d'envoi du message
+* Ajouter un symbole de chargement le temps que le serveur réponde
+* Faire en sorte que l'on soit toujours du scroll dans la zone du chat
+* Gérer des messages d'alerte si le token Mistral n'est pas bon
+
+
+------------------
+
+## Jour 3 :

@@ -5,19 +5,24 @@
   // Import clés API temporaire
   import { apiKey } from "./state.svelte.js";
   import { online } from "svelte/reactivity/window";
+  import { onMount } from "svelte";
+  import { preventDefault } from "svelte/legacy";
 
   // VARIABLES
   let userPrompt = $state("");
   const historyPrompt = $state([]);
+  let userLog = $state("");
 
   // ENVOI DES PROMPT
   const handleSentPrompt = async () => {
+    userLog = localStorage.getItem("id");
     const msg = await fetch("https://api.mistral.ai/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: `Bearer ${apiKey.id}`,
+        // Authorization: `Bearer ${apiKey.id}`,
+        Authorization: `Bearer ${userLog}`,
       },
       body: JSON.stringify({
         messages: [
@@ -30,7 +35,6 @@
       }),
     });
     const response = await msg.json();
-    console.log(response);
     const aiResponse = response.choices[0].message.content;
 
     //STOCKAGE DES PROMPTS ET AFFICHAGE
@@ -40,6 +44,24 @@
     );
     userPrompt = "";
   };
+
+  //MODAL ET LOG INITIAL
+  let dialog = $state();
+  let userToken = $state("");
+
+  const handleSumbmit = (e) => {
+    e.preventDefault();
+    localStorage.setItem("id", userToken);
+    userToken = "";
+    dialog.close();
+  };
+
+  function handleLoggin() {
+    if (localStorage.getItem("id") === null) {
+      dialog.showModal();
+    }
+  }
+  onMount(handleLoggin);
 </script>
 
 <!--********************************** HTML PART **********************************-->
@@ -74,6 +96,24 @@
     ></textarea>
     <button type="submit">Envoyer</button>
   </form> -->
+
+  <!--****** MODAL DE LOGIN ******-->
+
+  <dialog bind:this={dialog}>
+    <form action="" onsubmit={handleSumbmit}>
+      <label for="tokenMistral">Entrer votre apiKey / Token Mistral :</label>
+      <input
+        type="text"
+        name=""
+        id="tokenMistral"
+        required
+        bind:value={userToken}
+      />
+      <button type="submit"> Valider </button>
+    </form>
+  </dialog>
+
+  <!--****** CHAT ******-->
 
   <section class="chat-section">
     {#each historyPrompt as message}
@@ -261,7 +301,21 @@
       gap: 0.3rem;
     }
   }
+  /* *************** MAIN PART *************** */
+  dialog {
+    border: none;
+  }
+  dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+  }
 
+  dialog form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    gap: 1rem;
+  }
   /* *************** MAIN PART *************** */
   main {
     display: flex;
