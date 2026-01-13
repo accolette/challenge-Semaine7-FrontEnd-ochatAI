@@ -8,12 +8,10 @@
 
   // VARIABLES
   let userPrompt = $state("");
-  let userHistoryPrompt = $state([]);
-  let aiHistoryPrompt = $state([]);
+  const historyPrompt = $state([]);
 
   // ENVOI DES PROMPT
   const handleSentPrompt = async () => {
-    console.log("message envoyé:", userPrompt);
     const msg = await fetch("https://api.mistral.ai/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -32,15 +30,15 @@
       }),
     });
     const response = await msg.json();
+    console.log(response);
     const aiResponse = response.choices[0].message.content;
-    console.log("reponse du bot:", aiResponse);
 
     //STOCKAGE DES PROMPTS ET AFFICHAGE
-    userHistoryPrompt.push(userPrompt);
-    console.log("Histroqique User:", userHistoryPrompt);
-
-    aiHistoryPrompt.push(aiResponse);
-    console.log("Histroqique AI:", aiHistoryPrompt);
+    historyPrompt.push(
+      { text: userPrompt, author: "User" },
+      { text: aiResponse, author: "O'Chat" }
+    );
+    userPrompt = "";
   };
 </script>
 
@@ -63,6 +61,7 @@
 <!--*************** MAIN PART ***************-->
 
 <main>
+  <!-- TODO A VOIR PLUS TARD COMMENT GERER AFFICHAGE BLOC WELCOME -->
   <!-- <h1>
     Commence une conversation avec
     <em>O'Chat AI</em>
@@ -77,13 +76,23 @@
   </form> -->
 
   <section class="chat-section">
-    {#each userHistoryPrompt as user, index}
-      <article class="user-msg">
-        <p>{user}</p>
-      </article>
-      <article class="ai-msg">
-        <p>{aiHistoryPrompt[index]}</p>
-      </article>
+    {#each historyPrompt as message}
+      {#if message.author === "User"}
+        <article class="user-msg">
+          <p>{message.text}</p>
+          <Icon
+            icon="gravity-ui:person-pencil"
+            width="1rem"
+            height="1rem"
+            class="chatIcones"
+          />
+        </article>
+      {:else if message.author === "O'Chat"}
+        <article class="ai-msg">
+          <Icon icon="gravity-ui:geo-fill" class="chatIcones" />
+          <p>{message.text}</p>
+        </article>
+      {/if}
     {/each}
 
     <!-- <article class="user-msg">
@@ -95,20 +104,20 @@
       <p>Biensure !</p>
       <time datetime="2025-06-13">13 juin 2025 </time>
     </article> -->
+  </section>
 
-    <section class="promt-section">
-      <form action="">
-        <label for="ask-question-hp"></label>
-        <textarea
-          name=""
-          id="ask-question-hp"
-          placeholder="Poser une question..."
-          bind:value={userPrompt}
-        >
-        </textarea>
-        <button type="button" onclick={handleSentPrompt}>Envoyer</button>
-      </form>
-    </section>
+  <section class="promt-section">
+    <form action="">
+      <label for="ask-question-hp"></label>
+      <textarea
+        name=""
+        id="ask-question-hp"
+        placeholder="Poser une question..."
+        bind:value={userPrompt}
+      >
+      </textarea>
+      <button type="button" onclick={handleSentPrompt}>Envoyer</button>
+    </form>
   </section>
 </main>
 
@@ -277,16 +286,25 @@
     overflow: scroll;
     max-height: 70vh;
   }
+
+  .user-msg,
+  .ai-msg {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: baseline;
+  }
+
   .user-msg {
     color: var(--primarycolor);
     border-top: rgb(180, 180, 180) 1px solid;
     padding: 0.5rem 0.5rem 0rem 0.5rem;
-    text-align: right;
   }
 
   .ai-msg {
     border-top: rgb(180, 180, 180) 1px solid;
     padding: 0.5rem 0.5rem 0rem 0.5rem;
+    justify-content: flex-start;
   }
 
   /* main form {

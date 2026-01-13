@@ -41,6 +41,11 @@ button {
   display: inline;
 }
 
+.chatIcones {
+  min-width: 1rem;
+  min-height: 1rem;
+}
+
 .search-icon {
   color: rgb(130, 130, 130);
 }
