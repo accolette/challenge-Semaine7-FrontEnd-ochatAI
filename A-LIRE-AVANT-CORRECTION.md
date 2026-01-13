@@ -37,3 +37,46 @@
 * Mieux gérer la version desktop.
 * Cleaner mon fichier Svelte pour faire des modules pour chaque zone du site.
 * Faire toute la partie interactions.
+
+------------------
+
+## Jour 2 : Interaction avec l'IA et réponse aux demandes
+
+### Todo List :
+
+* [X] Todo de la journée avec durées objectivées sur 6h au total
+* [ ] Finir d'intégrer l'UI en mobile first (1h15)  
+Sous taches sur l'intégration : 
+* [X] Favicon
+* [X] Intégration partie chat
+* [ ] Menus cliquables
+* [ ] Modal de login à l'arrivée
+* [ ] Revoir style Btn nouveau chat
+* [ ] Bonus : Dispacher le fichier en composants  
+Puis :
+* [ ] Mettre le token dans un fichier dédié et tout de suite faire un gitignore la dessus
+* [ ] Etape 2 : Lier l'AP a Mistrail AI (1h30)
+* [ ] Gérer les réponses et erreurs éventuelles
+* [ ] Etape 3: Gérer un affichage differentié entre user et IA (1h30h)
+* [ ] Etape 4: Securiser le Mistral Token (1h)
+* [ ] Bonus : usage emarkdown (30min)
+* [ ] Remplir le carnet de bord (15min)
+* [ ] Push version du fichier pour le portfolio
+
+### Bilan de fin de journée :
+
+#### Ce que j'ai réussi à faire
+
+
+#### Ce que je n'ai pas réussi à faire
+
+
+#### Les choix que j'ai faits
+* J'ai commencé a regarder aux interaction natment pour reduire la zone historique : j'ai abandonné car je perdais trop de temps.
+
+#### Ce que tu referais différemment
+
+
+
+#### Les prochaines étapes si tu avais eu plus de temps
+

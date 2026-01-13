@@ -2,6 +2,8 @@
 <script>
   // Import des icônes
   import Icon from "@iconify/svelte";
+
+  // --*************** HEADER PART ***************--
 </script>
 
 <!--********************************** HTML PART **********************************-->
@@ -23,9 +25,10 @@
 <!--*************** MAIN PART ***************-->
 
 <main>
-  <h1>
+  <!-- <h1>
     Commence une conversation avec
-    <em>O'Chat AI <Icon icon="gravity-ui:sparkles-fill" id="appIcon" /></em>
+    <em>O'Chat AI</em>
+    <Icon icon="gravity-ui:geo-fill" id="appIcon" />
   </h1>
 
   <form action="">
@@ -33,7 +36,48 @@
     <textarea name="" id="ask-question-hp" placeholder="Poser une question..."
     ></textarea>
     <button type="submit">Envoyer</button>
-  </form>
+  </form> -->
+
+  <section class="chat-section">
+    <article class="user-msg">
+      <p>Peux tu m'expliquer Svlete ?</p>
+      <time datetime="2025-06-13">13 juin 2025 </time>
+    </article>
+
+    <article class="ai-msg">
+      <p>Biensure !</p>
+      <time datetime="2025-06-13">13 juin 2025 </time>
+    </article>
+
+    <article class="user-msg">
+      <p>Peux tu m'expliquer Svlete ?</p>
+      <time datetime="2025-06-13">13 juin 2025 </time>
+    </article>
+
+    <article class="ai-msg">
+      <p>Biensure !</p>
+      <time datetime="2025-06-13">13 juin 2025 </time>
+    </article>
+
+    <article class="user-msg">
+      <p>Peux tu m'expliquer Svlete ?</p>
+      <time datetime="2025-06-13">13 juin 2025 </time>
+    </article>
+
+    <article class="ai-msg">
+      <p>Biensure !</p>
+      <time datetime="2025-06-13">13 juin 2025 </time>
+    </article>
+  </section>
+
+  <section class="promt-section">
+    <form action="">
+      <label for="ask-question-hp"></label>
+      <textarea name="" id="ask-question-hp" placeholder="Poser une question..."
+      ></textarea>
+      <button type="button">Envoyer</button>
+    </form>
+  </section>
 </main>
 
 <!--*************** ASIDE PART ***************-->
@@ -194,15 +238,41 @@
     width: 6rem;
   }
 
-  main form {
+  .chat-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow: scroll;
+    max-height: 70vh;
+  }
+  .user-msg {
+    color: var(--primarycolor);
+    border-top: rgb(180, 180, 180) 1px solid;
+    padding: 0.5rem 0.5rem 0rem 0.5rem;
+    text-align: right;
+  }
+
+  .ai-msg {
+    border-top: rgb(180, 180, 180) 1px solid;
+    padding: 0.5rem 0.5rem 0rem 0.5rem;
+  }
+
+  /* main form {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     gap: 0.2rem;
-  }
+  } */
+
   #ask-question-hp {
-    height: 10vh;
-    width: 100%;
+    width: 80%;
+  }
+
+  .promt-section form {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    gap: 0.2rem;
   }
 
   @media screen and (min-width: 768px) {
@@ -362,5 +432,9 @@
         text-overflow: ellipsis;
       }
     }
+  }
+
+  .hidden {
+    display: none;
   }
 </style>
