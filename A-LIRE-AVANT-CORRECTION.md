@@ -54,10 +54,11 @@ Sous taches sur l'intégration :
 * [ ] Revoir style Btn nouveau chat
 * [ ] Bonus : Dispacher le fichier en composants  
 Puis :
-* [ ] Mettre le token dans un fichier dédié et tout de suite faire un gitignore la dessus
-* [ ] Etape 2 : Lier l'AP a Mistrail AI (1h30)
-* [ ] Gérer les réponses et erreurs éventuelles
-* [ ] Etape 3: Gérer un affichage differentié entre user et IA (1h30h)
+* [X] Mettre le token dans un fichier dédié et tout de suite faire un gitignore la dessus
+* [X] Etape 2 : Lier l'AP a Mistrail AI (1h30)
+* [X] Gérer les réponses et erreurs éventuelles
+* [X] Etape 3: Gérer un affichage differentié entre user et IA (1h30h)
+* [ ] Cleaner systeme de tableau étape 3
 * [ ] Etape 4: Securiser le Mistral Token (1h)
 * [ ] Bonus : usage emarkdown (30min)
 * [ ] Remplir le carnet de bord (15min)

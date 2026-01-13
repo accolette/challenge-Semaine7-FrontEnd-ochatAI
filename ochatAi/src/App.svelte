@@ -8,8 +8,8 @@
 
   // VARIABLES
   let userPrompt = $state("");
-  const userHistoryPrompt = [];
-  const aiHistoryPrompt = [];
+  let userHistoryPrompt = $state([]);
+  let aiHistoryPrompt = $state([]);
 
   // ENVOI DES PROMPT
   const handleSentPrompt = async () => {
@@ -77,7 +77,16 @@
   </form> -->
 
   <section class="chat-section">
-    <article class="user-msg">
+    {#each userHistoryPrompt as user, index}
+      <article class="user-msg">
+        <p>{user}</p>
+      </article>
+      <article class="ai-msg">
+        <p>{aiHistoryPrompt[index]}</p>
+      </article>
+    {/each}
+
+    <!-- <article class="user-msg">
       <p>Peux tu m'expliquer Svlete ?</p>
       <time datetime="2025-06-13">13 juin 2025 </time>
     </article>
@@ -85,7 +94,7 @@
     <article class="ai-msg">
       <p>Biensure !</p>
       <time datetime="2025-06-13">13 juin 2025 </time>
-    </article>
+    </article> -->
 
     <section class="promt-section">
       <form action="">
