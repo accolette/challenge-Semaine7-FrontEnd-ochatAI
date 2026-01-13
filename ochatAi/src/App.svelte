@@ -2,8 +2,34 @@
 <script>
   // Import des icônes
   import Icon from "@iconify/svelte";
+  // Import clés API temporaire
+  import { apiKey } from "./state.svelte.js";
 
-  // --*************** HEADER PART ***************--
+  // ENVOI DES PROMPT
+  let userPrompt = $state("");
+
+  const handleSentPrompt = async () => {
+    console.log("message envoyé:", userPrompt);
+    const msg = await fetch("https://api.mistral.ai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${apiKey.id}`,
+      },
+      body: JSON.stringify({
+        messages: [
+          {
+            content: userPrompt,
+            role: "user",
+          },
+        ],
+        model: "mistral-large-latest",
+      }),
+    });
+    const response = await msg.json();
+    console.table("reponse du bot:", response.choices[0].message.content);
+  };
 </script>
 
 <!--********************************** HTML PART **********************************-->
@@ -73,9 +99,14 @@
   <section class="promt-section">
     <form action="">
       <label for="ask-question-hp"></label>
-      <textarea name="" id="ask-question-hp" placeholder="Poser une question..."
-      ></textarea>
-      <button type="button">Envoyer</button>
+      <textarea
+        name=""
+        id="ask-question-hp"
+        placeholder="Poser une question..."
+        bind:value={userPrompt}
+      >
+      </textarea>
+      <button type="button" onclick={handleSentPrompt}>Envoyer</button>
     </form>
   </section>
 </main>
