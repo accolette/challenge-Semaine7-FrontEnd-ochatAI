@@ -4,10 +4,14 @@
   import Icon from "@iconify/svelte";
   // Import clés API temporaire
   import { apiKey } from "./state.svelte.js";
+  import { online } from "svelte/reactivity/window";
+
+  // VARIABLES
+  let userPrompt = $state("");
+  const userHistoryPrompt = [];
+  const aiHistoryPrompt = [];
 
   // ENVOI DES PROMPT
-  let userPrompt = $state("");
-
   const handleSentPrompt = async () => {
     console.log("message envoyé:", userPrompt);
     const msg = await fetch("https://api.mistral.ai/v1/chat/completions", {
@@ -28,7 +32,15 @@
       }),
     });
     const response = await msg.json();
-    console.table("reponse du bot:", response.choices[0].message.content);
+    const aiResponse = response.choices[0].message.content;
+    console.log("reponse du bot:", aiResponse);
+
+    //STOCKAGE DES PROMPTS ET AFFICHAGE
+    userHistoryPrompt.push(userPrompt);
+    console.log("Histroqique User:", userHistoryPrompt);
+
+    aiHistoryPrompt.push(aiResponse);
+    console.log("Histroqique AI:", aiHistoryPrompt);
   };
 </script>
 
@@ -75,39 +87,19 @@
       <time datetime="2025-06-13">13 juin 2025 </time>
     </article>
 
-    <article class="user-msg">
-      <p>Peux tu m'expliquer Svlete ?</p>
-      <time datetime="2025-06-13">13 juin 2025 </time>
-    </article>
-
-    <article class="ai-msg">
-      <p>Biensure !</p>
-      <time datetime="2025-06-13">13 juin 2025 </time>
-    </article>
-
-    <article class="user-msg">
-      <p>Peux tu m'expliquer Svlete ?</p>
-      <time datetime="2025-06-13">13 juin 2025 </time>
-    </article>
-
-    <article class="ai-msg">
-      <p>Biensure !</p>
-      <time datetime="2025-06-13">13 juin 2025 </time>
-    </article>
-  </section>
-
-  <section class="promt-section">
-    <form action="">
-      <label for="ask-question-hp"></label>
-      <textarea
-        name=""
-        id="ask-question-hp"
-        placeholder="Poser une question..."
-        bind:value={userPrompt}
-      >
-      </textarea>
-      <button type="button" onclick={handleSentPrompt}>Envoyer</button>
-    </form>
+    <section class="promt-section">
+      <form action="">
+        <label for="ask-question-hp"></label>
+        <textarea
+          name=""
+          id="ask-question-hp"
+          placeholder="Poser une question..."
+          bind:value={userPrompt}
+        >
+        </textarea>
+        <button type="button" onclick={handleSentPrompt}>Envoyer</button>
+      </form>
+    </section>
   </section>
 </main>
 
@@ -463,9 +455,5 @@
         text-overflow: ellipsis;
       }
     }
-  }
-
-  .hidden {
-    display: none;
   }
 </style>
