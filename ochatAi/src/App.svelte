@@ -2,11 +2,11 @@
 <script>
   // Import des icônes
   import Icon from "@iconify/svelte";
-  // Import clés API temporaire
-  import { apiKey } from "./state.svelte.js";
-  import { online } from "svelte/reactivity/window";
+  // Import clés API temporaire :
+  // import { apiKey } from "./state.svelte.js";
   import { onMount } from "svelte";
-  import { preventDefault } from "svelte/legacy";
+  // Import style makdown
+  import Markdown from "svelte-exmarkdown";
 
   // VARIABLES
   let userPrompt = $state("");
@@ -14,7 +14,9 @@
   let userLog = $state("");
 
   // ENVOI DES PROMPT
-  const handleSentPrompt = async () => {
+  const handleSentPrompt = async (e) => {
+    e.preventDefault();
+    // Gestion de l'ID de l'utilisateur
     userLog = localStorage.getItem("id");
     const msg = await fetch("https://api.mistral.ai/v1/chat/completions", {
       method: "POST",
@@ -22,6 +24,7 @@
         "Content-Type": "application/json",
         Accept: "application/json",
         // Authorization: `Bearer ${apiKey.id}`,
+        // Ci dessus la version initiale avant usage du local storage
         Authorization: `Bearer ${userLog}`,
       },
       body: JSON.stringify({
@@ -37,15 +40,15 @@
     const response = await msg.json();
     const aiResponse = response.choices[0].message.content;
 
-    //STOCKAGE DES PROMPTS ET AFFICHAGE
+    // Stockage du prompt et affichage
     historyPrompt.push(
-      { text: userPrompt, author: "User" },
+      { text: userPrompt.trim(), author: "User" },
       { text: aiResponse, author: "O'Chat" }
     );
     userPrompt = "";
   };
 
-  //MODAL ET LOG INITIAL
+  // MODAL DU LOG INITIAL
   let dialog = $state();
   let userToken = $state("");
 
@@ -113,13 +116,13 @@
     </form>
   </dialog>
 
-  <!--****** CHAT ******-->
+  <!--****** HISTORY CHAT ******-->
 
   <section class="chat-section">
     {#each historyPrompt as message}
       {#if message.author === "User"}
         <article class="user-msg">
-          <p>{message.text}</p>
+          <p><Markdown md={message.text} /></p>
           <Icon
             icon="gravity-ui:person-pencil"
             width="1rem"
@@ -130,7 +133,7 @@
       {:else if message.author === "O'Chat"}
         <article class="ai-msg">
           <Icon icon="gravity-ui:geo-fill" class="chatIcones" />
-          <p>{message.text}</p>
+          <p><Markdown md={message.text} /></p>
         </article>
       {/if}
     {/each}
@@ -146,8 +149,9 @@
     </article> -->
   </section>
 
+  <!--****** PROMPT ******-->
   <section class="promt-section">
-    <form action="">
+    <form action="" onsubmit={handleSentPrompt}>
       <label for="ask-question-hp"></label>
       <textarea
         name=""
@@ -156,7 +160,7 @@
         bind:value={userPrompt}
       >
       </textarea>
-      <button type="button" onclick={handleSentPrompt}>Envoyer</button>
+      <button type="submit">Envoyer</button>
     </form>
   </section>
 </main>
@@ -301,7 +305,7 @@
       gap: 0.3rem;
     }
   }
-  /* *************** MAIN PART *************** */
+  /* *********** MODAL LOGGIN PART *********** */
   dialog {
     border: none;
   }
@@ -320,10 +324,11 @@
   main {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     padding: 1rem;
     gap: 1rem;
-    height: 70vh;
+    height: 85vh;
+    margin: auto;
   }
 
   main button {
@@ -347,17 +352,16 @@
     flex-direction: row;
     justify-content: flex-end;
     align-items: baseline;
+    padding-top: 1rem;
   }
 
   .user-msg {
     color: var(--primarycolor);
     border-top: rgb(180, 180, 180) 1px solid;
-    padding: 0.5rem 0.5rem 0rem 0.5rem;
   }
 
   .ai-msg {
     border-top: rgb(180, 180, 180) 1px solid;
-    padding: 0.5rem 0.5rem 0rem 0.5rem;
     justify-content: flex-start;
   }
 
@@ -369,14 +373,15 @@
   } */
 
   #ask-question-hp {
-    width: 80%;
+    width: 100%;
   }
 
   .promt-section form {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: flex-end;
     gap: 0.2rem;
+    margin: 0.5rem;
   }
 
   @media screen and (min-width: 768px) {
@@ -391,8 +396,7 @@
       position: absolute;
       left: 20vw;
       width: 100%;
-      padding: 0 15rem;
-      margin: auto;
+      padding: 1rem 10%;
     }
   }
 
