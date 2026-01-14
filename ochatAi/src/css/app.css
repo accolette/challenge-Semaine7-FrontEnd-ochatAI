@@ -75,6 +75,10 @@ main {
   background-color: var(--lightcolor);
 }
 
+#chatWait {
+  margin-left: 1rem;
+}
+
 /* *************************** ASIDE PART *************************** */
 aside {
   background-color: var(--bgcolor);

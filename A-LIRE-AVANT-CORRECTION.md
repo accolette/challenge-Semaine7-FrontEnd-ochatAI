@@ -104,11 +104,11 @@
 * [ ] Faire un "entrer" au clavier fonctionnel
 * [X] Gérer des messages d'alerte si le token Mistral n'est pas bon
 * [X] Faire en sorte que l'on soit toujours en bas du scroll dans la zone du chat  
-* [ ] Faire un load le temps du chargement du serveur
+* [ ] Faire un loader le temps du chargement du serveur
 > Objectifs du J3 :
 * [X] Étape 1 : Mettre en place un backend Pocketbase (15min)
-* [ ] Étape 2 : Mettre en place les requêtes d'enregistrement (2h)
-* [ ] Étape 3 : Différencier les messages IA et humain (1h30)
+* [X] Étape 2 : Mettre en place les requêtes d'enregistrement (2h)
+* [X] Étape 3 : Différencier les messages IA et humain (1h30)
 * [ ] Remplir le carnet de bord (15 min)
 * [ ] Push la version du fichier pour le portfolio, avec readme et ewplication de comment creer sa clefs API mistral, c'est gratuit etc  
 > Ce qui n'a pas été fait du J1 (intégration mobile first) :
@@ -125,10 +125,10 @@
 * gerer la soumission du prompt avec la touche entrer
 
 #### Les choix que j'ai faits :
-
 * 
 
 #### Ce que tu referais différemment :
+*
 
 #### Les prochaines étapes si tu avais eu plus de temps :
 * 

@@ -16,10 +16,12 @@
   let userLog = $state("");
   let msgDisplay = $state();
   let backEndHistoryPrompt = $state([]);
+  let isLoading = $state(true);
 
   // ENVOI DES PROMPT
   const handleSentPrompt = async (e) => {
     e.preventDefault();
+    isLoading = true;
     // CONTROL ID  USER ET ENVOI DU PROMPT A MISTRAL
     userLog = localStorage.getItem("id");
     const msg = await fetch("https://api.mistral.ai/v1/chat/completions", {
@@ -78,7 +80,7 @@
         }),
       }
     );
-
+    isLoading = false;
     // AFFICHAGE DES DONNES BACKEND DANS CHAT
     handleHistory();
   };
@@ -115,6 +117,7 @@
 
   // FONCTION POUR AFFICHER HISTORIQUE
   async function handleHistory() {
+    isLoading = true;
     const historyCurrentMsg = await fetch(
       "http://127.0.0.1:8090/api/collections/chat_history/records",
       {
@@ -129,6 +132,7 @@
     // Gestion du scroll pour etre toujours en bas de la conversation
     await tick();
     msgDisplay.scrollTop = msgDisplay.scrollHeight;
+    isLoading = false;
   }
 
   // DISPLAY MODAL SI PAS ID VALID AU LOGGIN
@@ -229,6 +233,8 @@
 
   <!--****** PROMPT ******-->
   <section class="promt-section">
+    {#if isLoading}
+      <Icon icon="svg-spinners:3-dots-bounce" id="chatWait" width="2rem" />{/if}
     <form action="" onsubmit={handleSentPrompt}>
       <label for="ask-question-hp"></label>
       <textarea
