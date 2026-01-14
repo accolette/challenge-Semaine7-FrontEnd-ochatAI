@@ -96,39 +96,53 @@
 
 ### Todo List :
 
-* [X] Todo de la journée avec durées objectivées sur 6 h au total   
+* [x] Todo de la journée avec durées objectivées sur 6 h au total
+
 > Ce qui n'a pas été fait du J2 : (2h)
-* [X] Bonus : usage eMarkdown
-* [X] remettre le fichier state clean mais en full commentaires
-* [X] utiliser du .trim sur les msg
-* [ ] Faire un "entrer" au clavier fonctionnel
-* [X] Gérer des messages d'alerte si le token Mistral n'est pas bon
-* [X] Faire en sorte que l'on soit toujours en bas du scroll dans la zone du chat  
-* [ ] Faire un loader le temps du chargement du serveur
+
+* [x] Bonus : usage eMarkdown
+* [x] Remettre le fichier state clean mais en full commentaires
+* [x] Utiliser du .trim sur les messages
+* [ ] Faire un "Entrée" au clavier qui soumet et qui ne renvoie pas à la ligne
+* [x] Gérer des messages d'alerte si le token Mistral n'est pas bon
+* [x] Faire en sorte que l'on soit toujours en bas du scroll dans la zone du chat
+* [x] Faire un loader le temps du chargement du serveur
+
 > Objectifs du J3 :
-* [X] Étape 1 : Mettre en place un backend Pocketbase (15min)
-* [X] Étape 2 : Mettre en place les requêtes d'enregistrement (2h)
-* [X] Étape 3 : Différencier les messages IA et humain (1h30)
-* [ ] Remplir le carnet de bord (15 min)
-* [ ] Push la version du fichier pour le portfolio, avec readme et ewplication de comment creer sa clefs API mistral, c'est gratuit etc  
+
+* [x] Étape 1 : Mettre en place un backend Pocketbase (15 min)
+* [x] Étape 2 : Mettre en place les requêtes d'enregistrement (2h)
+* [x] Étape 3 : Différencier les messages IA et humain (1h30)
+* [X] Remplir le carnet de bord (15 min)
+* [ ] Push la version du fichier pour le portfolio, avec readme et explication de comment créer sa clé API Mistral, c'est gratuit, etc.
+
 > Ce qui n'a pas été fait du J1 (intégration mobile first) :
+
 * [ ] Menus cliquables
 * [ ] Revoir le style du bouton « nouveau chat »
-* [ ] Bonus : Dispatcher le fichier en composants  
+* [ ] Bonus : Dispatcher le fichier en composants
 
 ### Bilan de fin de journée
+
 #### Ce que j'ai réussi à faire :
-* gerer le message d'alterne si clé API eronnée et bloquer l'acces à la suite tant que l'ID n'est pas valide
-* faire que l'on soit toujorus en bas en terme de scroll dans le chat, j'ai réussi avec chat gpt a qui j'ai demandé des indices, pas la solution immediate. mais j'ai été frotement guidée la dessus
+
+* Gérer le message d'alerte si clé API erronée et bloquer l'accès à la suite tant que l'ID n'est pas valide
+* Faire que l'on soit toujours en bas en termes de scroll dans le chat, j'ai réussi avec ChatGPT à qui j'ai demandé des indices, pas la solution immédiate, mais j'ai été fortement guidée là-dessus
+* Idem pour faire un loader le temps du chargement de la réponse, avec l'aide de ChatGPT
 
 #### Ce que je n'ai pas réussi à faire :
-* gerer la soumission du prompt avec la touche entrer
+
+* Gérer la soumission du prompt avec la touche Entrée
+* Gérer le bug de déformation de mon bouton « nouveau chat » dans le menu aside à gauche
 
 #### Les choix que j'ai faits :
-* 
+
+* Arrêter à l'heure aujourd'hui
 
 #### Ce que tu referais différemment :
+
 *
 
 #### Les prochaines étapes si tu avais eu plus de temps :
-* 
+
+* Ce qui reste dans la todo list de non cochée !

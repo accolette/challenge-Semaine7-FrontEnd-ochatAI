@@ -144,6 +144,7 @@
       handleHistory();
     }
   }
+
   onMount(handleLoggin);
 </script>
 
@@ -253,8 +254,9 @@
 
 <aside>
   <section id="conv-nav" class="responsive-hidden">
-    <button type="button"
-      ><Icon icon="gravity-ui:plus" width="1rem" height="1rem" />Nouveau Chat</button
+    <button type="button">
+      <Icon icon="gravity-ui:plus" width="1rem" height="1rem" />
+      Nouveau Chat</button
     >
   </section>
   <section id="history-nav">
@@ -588,10 +590,10 @@
     #conv-nav button {
       display: flex;
       align-items: center;
-      padding: 0.5rem 1.2rem;
       gap: 0.5rem;
       background-color: var(--primarycolor);
       color: var(--lightcolor);
+      padding: 0.5rem 1.2rem 0.5rem 0.5rem;
     }
 
     #history-nav {
