@@ -50,11 +50,10 @@
       { text: userPrompt.trim(), author: "User" },
       { text: aiResponse, author: "O'Chat" }
     );
-    console.log("hauteru de scroll ?", msgDisplay.scrollHeight);
+
+    // gestion du scroll pour etre toujours en bas de la conversation
     await tick();
     msgDisplay.scrollTop = msgDisplay.scrollHeight;
-    console.log("hauteru du top ?", msgDisplay.scrollTop);
-    userPrompt = "";
   };
 
   // MODAL DU LOG INITIAL
@@ -75,7 +74,6 @@
       },
     });
     const response = await msg.json();
-    console.log("reponse serveur:", response.detail);
     if (response.detail === "Unauthorized") {
       localStorage.removeItem("id");
       alert(

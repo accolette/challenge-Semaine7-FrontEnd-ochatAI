@@ -105,9 +105,9 @@
 * [X] Gérer des messages d'alerte si le token Mistral n'est pas bon
 * [X] Faire en sorte que l'on soit toujours en bas du scroll dans la zone du chat  
 > Objectifs du J3 :
-* [ ] Étape 1 : Mettre en place un backend Pocketbase (s1h)
+* [X] Étape 1 : Mettre en place un backend Pocketbase (15min)
 * [ ] Étape 2 : Mettre en place les requêtes d'enregistrement (2h)
-* [ ] Étape 3 : Différencier les messages IA et humain (45min)
+* [ ] Étape 3 : Différencier les messages IA et humain (1h30)
 * [ ] Remplir le carnet de bord (15 min)
 * [ ] Push la version du fichier pour le portfolio, avec readme et ewplication de comment creer sa clefs API mistral, c'est gratuit etc  
 > Ce qui n'a pas été fait du J1 (intégration mobile first) :
