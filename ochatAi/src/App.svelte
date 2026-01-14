@@ -38,8 +38,10 @@
       }),
     });
     const response = await msg.json();
+    if (response.detail === "Unauthorized") {
+      dialog.showModal();
+    }
     const aiResponse = response.choices[0].message.content;
-
     // Stockage du prompt et affichage
     historyPrompt.push(
       { text: userPrompt.trim(), author: "User" },
@@ -52,13 +54,34 @@
   let dialog = $state();
   let userToken = $state("");
 
-  const handleSumbmit = (e) => {
+  const handleSumbmit = async (e) => {
     e.preventDefault();
     localStorage.setItem("id", userToken);
-    userToken = "";
-    dialog.close();
+    // Gestion de l'ID de l'utilisateur
+    userLog = localStorage.getItem("id");
+    const msg = await fetch("https://api.mistral.ai/v1/chat/completions", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${userLog}`,
+      },
+    });
+    const response = await msg.json();
+    console.log("reponse serveur:", response.detail);
+    if (response.detail === "Unauthorized") {
+      localStorage.removeItem("id");
+      alert(
+        `Clé non valide, créez en une, c'est gratuit! \n\nPlus d'infos sur : shttps://docs.mistral.ai/getting-started/quickstart`
+      );
+      userToken = "";
+    } else {
+      userToken = "";
+      dialog.close();
+    }
   };
 
+  // DISPLAY MODAL SI PAS ID VALID AU LOGGIN
   function handleLoggin() {
     if (localStorage.getItem("id") === null) {
       dialog.showModal();
@@ -104,7 +127,9 @@
 
   <dialog bind:this={dialog}>
     <form action="" onsubmit={handleSumbmit}>
-      <label for="tokenMistral">Entrer votre apiKey / Token Mistral :</label>
+      <label for="tokenMistral"
+        >Entrez une clé API / Token Mistral valide :</label
+      >
       <input
         type="text"
         name=""
