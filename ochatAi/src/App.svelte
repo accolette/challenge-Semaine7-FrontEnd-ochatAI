@@ -7,11 +7,14 @@
   import { onMount } from "svelte";
   // Import style makdown
   import Markdown from "svelte-exmarkdown";
+  // Import pour gestion du scroll
+  import { tick } from "svelte";
 
   // VARIABLES
   let userPrompt = $state("");
   const historyPrompt = $state([]);
   let userLog = $state("");
+  let msgDisplay = $state();
 
   // ENVOI DES PROMPT
   const handleSentPrompt = async (e) => {
@@ -47,6 +50,10 @@
       { text: userPrompt.trim(), author: "User" },
       { text: aiResponse, author: "O'Chat" }
     );
+    console.log("hauteru de scroll ?", msgDisplay.scrollHeight);
+    await tick();
+    msgDisplay.scrollTop = msgDisplay.scrollHeight;
+    console.log("hauteru du top ?", msgDisplay.scrollTop);
     userPrompt = "";
   };
 
@@ -143,7 +150,7 @@
 
   <!--****** HISTORY CHAT ******-->
 
-  <section class="chat-section">
+  <section class="chat-section" bind:this={msgDisplay}>
     {#each historyPrompt as message}
       {#if message.author === "User"}
         <article class="user-msg">

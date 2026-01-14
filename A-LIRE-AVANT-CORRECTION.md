@@ -102,8 +102,8 @@
 * [X] remettre le fichier state clean mais en full commentaires
 * [X] utiliser du .trim sur les msg
 * [ ] Faire un "entrer" au clavier fonctionnel
-* [ ] Gérer des messages d'alerte si le token Mistral n'est pas bon
-* [ ] Faire en sorte que l'on soit toujours du scroll dans la zone du chat  
+* [X] Gérer des messages d'alerte si le token Mistral n'est pas bon
+* [X] Faire en sorte que l'on soit toujours en bas du scroll dans la zone du chat  
 > Objectifs du J3 :
 * [ ] Étape 1 : Mettre en place un backend Pocketbase (s1h)
 * [ ] Étape 2 : Mettre en place les requêtes d'enregistrement (2h)
@@ -117,7 +117,8 @@
 
 ### Bilan de fin de journée
 #### Ce que j'ai réussi à faire :
-* 
+* gerer le message d'alterne si clé API eronnée et bloquer l'acces à la suite tant que l'ID n'est pas valide
+* faire que l'on soit toujorus en bas en terme de scroll dans le chat, j'ai réussi avec chat gpt a qui j'ai demandé des indices, pas la solution immediate. mais j'ai été frotement guidée la dessus
 
 #### Ce que je n'ai pas réussi à faire :
 * gerer la soumission du prompt avec la touche entrer
