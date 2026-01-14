@@ -104,6 +104,7 @@
 * [ ] Faire un "entrer" au clavier fonctionnel
 * [X] Gérer des messages d'alerte si le token Mistral n'est pas bon
 * [X] Faire en sorte que l'on soit toujours en bas du scroll dans la zone du chat  
+* [ ] Faire un load le temps du chargement du serveur
 > Objectifs du J3 :
 * [X] Étape 1 : Mettre en place un backend Pocketbase (15min)
 * [ ] Étape 2 : Mettre en place les requêtes d'enregistrement (2h)

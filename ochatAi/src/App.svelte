@@ -15,11 +15,12 @@
   const historyPrompt = $state([]);
   let userLog = $state("");
   let msgDisplay = $state();
+  let backEndHistoryPrompt = $state([]);
 
   // ENVOI DES PROMPT
   const handleSentPrompt = async (e) => {
     e.preventDefault();
-    // Gestion de l'ID de l'utilisateur
+    // CONTROL ID  USER ET ENVOI DU PROMPT A MISTRAL
     userLog = localStorage.getItem("id");
     const msg = await fetch("https://api.mistral.ai/v1/chat/completions", {
       method: "POST",
@@ -40,20 +41,46 @@
         model: "mistral-large-latest",
       }),
     });
+    // VERIFICATION ID OK
     const response = await msg.json();
     if (response.detail === "Unauthorized") {
       dialog.showModal();
     }
     const aiResponse = response.choices[0].message.content;
-    // Stockage du prompt et affichage
-    historyPrompt.push(
-      { text: userPrompt.trim(), author: "User" },
-      { text: aiResponse, author: "O'Chat" }
+
+    // STOCKAGE PROMPT EN BACKEND
+    const saveCurrentMsg = await fetch(
+      "http://127.0.0.1:8090/api/collections/chat_history/records",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content: userPrompt,
+          role: "user",
+        }),
+      }
+    );
+    userPrompt = "";
+
+    // STOCKAGE REEPONSE IA EN BACKEND
+    const saveAitMsg = await fetch(
+      "http://127.0.0.1:8090/api/collections/chat_history/records",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content: aiResponse,
+          role: "O'Chat",
+        }),
+      }
     );
 
-    // gestion du scroll pour etre toujours en bas de la conversation
-    await tick();
-    msgDisplay.scrollTop = msgDisplay.scrollHeight;
+    // AFFICHAGE DES DONNES BACKEND DANS CHAT
+    handleHistory();
   };
 
   // MODAL DU LOG INITIAL
@@ -86,10 +113,31 @@
     }
   };
 
+  // FONCTION POUR AFFICHER HISTORIQUE
+  async function handleHistory() {
+    const historyCurrentMsg = await fetch(
+      "http://127.0.0.1:8090/api/collections/chat_history/records",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const backEndHistResponse = await historyCurrentMsg.json();
+    backEndHistoryPrompt = backEndHistResponse.items;
+    // Gestion du scroll pour etre toujours en bas de la conversation
+    await tick();
+    msgDisplay.scrollTop = msgDisplay.scrollHeight;
+  }
+
   // DISPLAY MODAL SI PAS ID VALID AU LOGGIN
-  function handleLoggin() {
+  async function handleLoggin() {
     if (localStorage.getItem("id") === null) {
       dialog.showModal();
+    } else {
+      // AFFICHAGE DES DONNES BACKEND
+      handleHistory();
     }
   }
   onMount(handleLoggin);
@@ -149,10 +197,10 @@
   <!--****** HISTORY CHAT ******-->
 
   <section class="chat-section" bind:this={msgDisplay}>
-    {#each historyPrompt as message}
-      {#if message.author === "User"}
+    {#each backEndHistoryPrompt as message}
+      {#if message.role === "user"}
         <article class="user-msg">
-          <p><Markdown md={message.text} /></p>
+          <p><Markdown md={message.content} /></p>
           <Icon
             icon="gravity-ui:person-pencil"
             width="1rem"
@@ -160,10 +208,10 @@
             class="chatIcones"
           />
         </article>
-      {:else if message.author === "O'Chat"}
+      {:else if message.role === "O'Chat"}
         <article class="ai-msg">
           <Icon icon="gravity-ui:geo-fill" class="chatIcones" />
-          <p><Markdown md={message.text} /></p>
+          <p><Markdown md={message.content} /></p>
         </article>
       {/if}
     {/each}
