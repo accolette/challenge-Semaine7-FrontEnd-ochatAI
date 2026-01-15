@@ -173,7 +173,7 @@
 * [X] Étape 2 : Mettre en place une sidebar pour gérer les conversations  <font color="green">
  (45min)</font>
 * [ ] Remttre le bouton new chat sur version mobile et tab  
-* [ ] Étape 3 : On fait fonctionner tout ça <font color="green">(2h)</font>  
+* [X] Étape 3 : On fait fonctionner tout ça <font color="green">(2h)</font>  
 > Bonus J4 <font color="green">(1h30)</font>:
 * [ ] Bonus : Supprimer les conv
 * [ ] Bonus : Afficher masquer side bar
@@ -204,7 +204,7 @@
 * 
 
 #### Ce que tu referais différemment :
-*
+* je me suis ententée a vouloir gérer à ma facon les conversation, la prochaine fois je suivreais les tips donnés 😅 en attendant j'ai tout de meme ressui à faire ce que je voulais. je suis curieuse de savoir si c'était pertinent ou non, si ma méthode est plus lourde qu'une autre manière de faire.
 
 #### Les prochaines étapes si tu avais eu plus de temps :
 

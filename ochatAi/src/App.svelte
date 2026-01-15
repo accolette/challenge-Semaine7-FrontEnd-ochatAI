@@ -12,11 +12,14 @@
 
   // VARIABLES
   let userPrompt = $state("");
-  let historyPrompt = $state([]);
   let userLog = $state("");
   let msgDisplay = $state();
   let backEndHistoryPrompt = $state([]);
   let isLoading = $state(true);
+  let isHidden = $state(false);
+  let notHidden = $state(true);
+  let backEndHistoryChat = $state([]);
+  let convActuelle = $state();
 
   // AFFICHAGE DES DONNES BACKEND DANS CHAT
   handleHistory();
@@ -24,8 +27,10 @@
   // ENVOI DES PROMPT
   const handleSentPrompt = async (e) => {
     e.preventDefault();
-    let convActuelle = backEndHistoryPrompt[0].conv_relation;
-    console.log("recup ? de: ", convActuelle);
+
+    convActuelle = backEndHistoryPrompt[0].conv_relation;
+
+    console.log("recup id convactuelle: ", convActuelle);
 
     isLoading = true;
 
@@ -58,6 +63,7 @@
     const aiResponse = response.choices[0].message.content;
 
     // STOCKAGE PROMPT EN BACKEND
+
     const saveCurrentMsg = await fetch(
       "http://127.0.0.1:8090/api/collections/chat_history/records",
       {
@@ -72,6 +78,10 @@
         }),
       }
     );
+    const responsPrompt = await saveCurrentMsg.json();
+
+    backEndHistoryPrompt.push(responsPrompt);
+
     userPrompt = "";
 
     // STOCKAGE REPONSE IA EN BACKEND
@@ -89,7 +99,15 @@
         }),
       }
     );
+    const responsAi = await saveAitMsg.json();
+    backEndHistoryPrompt.push(responsAi);
     isLoading = false;
+
+    // Gestion du scroll pour etre toujours en bas de la conversation
+    await tick();
+    msgDisplay.scrollTop = msgDisplay.scrollHeight;
+    isLoading = false;
+    return id;
   };
 
   // MODAL DU LOG INITIAL
@@ -130,6 +148,8 @@
       // AFFICHAGE DES DONNES BACKEND
       //   handleHistory(); /////////////////////////////// < C'est ici que je devrais remettre la version HP du chat vierge non intégré pour le moment
       handleChatHistory();
+      isHidden = true;
+      notHidden = false;
     }
   }
 
@@ -137,6 +157,7 @@
   let subjetcNewChat = $state();
   async function createNewChat(e) {
     e.preventDefault();
+
     if (localStorage.getItem("id") === null) {
       dialog.showModal();
     } else {
@@ -155,13 +176,29 @@
       );
       const response = await newChat.json();
       console.log(response);
-      subjetcNewChat = "";
+      handleHistory(response.id);
+
+      //ENVOI D4UN MSG VIDE
+      const createAitMsg = await fetch(
+        "http://127.0.0.1:8090/api/collections/chat_history/records",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            content: "Pose une question",
+            role: "O'Chat",
+            conv_relation: response.id,
+          }),
+        }
+      );
+      const responsAi = await createAitMsg.json();
+      backEndHistoryPrompt.push(responsAi);
     }
   }
 
   // AFFICHAGE DES CONVESRATION EN MEMOIRE
-  let backEndHistoryChat = $state([]);
-
   async function handleChatHistory() {
     const historyCurrentChat = await fetch(
       "http://127.0.0.1:8090/api/collections/conv_history/records",
@@ -179,6 +216,10 @@
   // FONCTION POUR AFFICHER HISTORIQUE DU CHAT
   async function handleHistory(id) {
     isLoading = true;
+    // Affiche la vue conversation et masque la Homepage
+    isHidden = false;
+    notHidden = true;
+
     const historyCurrentMsg = await fetch(
       `http://127.0.0.1:8090/api/collections/chat_history/records`,
       {
@@ -189,6 +230,7 @@
       }
     );
     const backEndHistResponse = await historyCurrentMsg.json();
+    console.log("vue des donée", backEndHistResponse);
     backEndHistoryPrompt = [];
     for (let item of backEndHistResponse.items) {
       if (item.conv_relation === id) {
@@ -202,6 +244,7 @@
     isLoading = false;
     return id;
   }
+
   onMount(handleLoggin);
 </script>
 
@@ -225,18 +268,22 @@
 
 <main>
   <!-- TODO A VOIR PLUS TARD COMMENT GERER AFFICHAGE BLOC WELCOME -->
-  <!-- <h1>
-    Commence une conversation avec
-    <em>O'Chat AI</em>
-    <Icon icon="gravity-ui:geo-fill" id="appIcon" />
-  </h1>
-
-  <form action="">
-    <label for="ask-question-hp"></label>
-    <textarea name="" id="ask-question-hp" placeholder="Poser une question..."
-    ></textarea>
-    <button type="submit">Envoyer</button>
-  </form> -->
+  <section class="bloc-welcome hidden" class:hidden={notHidden}>
+    <h1>
+      Commence une conversation avec
+      <em>O'Chat AI</em>
+      <Icon icon="gravity-ui:geo-fill" id="appIcon" />
+    </h1>
+    <form action="">
+      <label for="ask-question-hp"></label>
+      <textarea
+        name=""
+        id="ask-question-hp"
+        placeholder="Nomme cette nouvelle conversation"
+      ></textarea>
+      <button type="submit">Envoyer</button>
+    </form>
+  </section>
 
   <!--****** MODAL DE LOGIN ******-->
 
@@ -277,20 +324,10 @@
         </article>
       {/if}
     {/each}
-
-    <!-- <article class="user-msg">
-      <p>Peux tu m'expliquer Svlete ?</p>
-      <time datetime="2025-06-13">13 juin 2025 </time>
-    </article>
-
-    <article class="ai-msg">
-      <p>Biensure !</p>
-      <time datetime="2025-06-13">13 juin 2025 </time>
-    </article> -->
   </section>
 
   <!--****** PROMPT ******-->
-  <section class="promt-section">
+  <section class="promt-section" class:hidden={isHidden}>
     {#if isLoading}
       <Icon icon="svg-spinners:3-dots-bounce" id="chatWait" width="2rem" />{/if}
     <form action="" onsubmit={handleSentPrompt}>
@@ -320,7 +357,7 @@
         placeholder="Sujet du nouveau Chat"
         bind:value={subjetcNewChat}
       />
-      <button type="button">
+      <button type="submit">
         <Icon icon="gravity-ui:plus" width="1rem" height="1rem" />
         Nouveau Chat</button
       >
@@ -462,12 +499,12 @@
     justify-content: flex-start;
   }
 
-  /* main form {
+  main form {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     gap: 0.2rem;
-  } */
+  }
 
   #ask-question-hp {
     width: 100%;
