@@ -12,16 +12,23 @@
 
   // VARIABLES
   let userPrompt = $state("");
-  const historyPrompt = $state([]);
+  let historyPrompt = $state([]);
   let userLog = $state("");
   let msgDisplay = $state();
   let backEndHistoryPrompt = $state([]);
   let isLoading = $state(true);
 
+  // AFFICHAGE DES DONNES BACKEND DANS CHAT
+  handleHistory();
+
   // ENVOI DES PROMPT
   const handleSentPrompt = async (e) => {
     e.preventDefault();
+    let convActuelle = backEndHistoryPrompt[0].conv_relation;
+    console.log("recup ? de: ", convActuelle);
+
     isLoading = true;
+
     // CONTROL ID  USER ET ENVOI DU PROMPT A MISTRAL
     userLog = localStorage.getItem("id");
     const msg = await fetch("https://api.mistral.ai/v1/chat/completions", {
@@ -61,6 +68,7 @@
         body: JSON.stringify({
           content: userPrompt,
           role: "user",
+          conv_relation: convActuelle,
         }),
       }
     );
@@ -77,12 +85,11 @@
         body: JSON.stringify({
           content: aiResponse,
           role: "O'Chat",
+          conv_relation: convActuelle,
         }),
       }
     );
     isLoading = false;
-    // AFFICHAGE DES DONNES BACKEND DANS CHAT
-    handleHistory();
   };
 
   // MODAL DU LOG INITIAL
@@ -115,33 +122,14 @@
     }
   };
 
-  // FONCTION POUR AFFICHER HISTORIQUE
-  async function handleHistory() {
-    isLoading = true;
-    const historyCurrentMsg = await fetch(
-      "http://127.0.0.1:8090/api/collections/chat_history/records",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const backEndHistResponse = await historyCurrentMsg.json();
-    backEndHistoryPrompt = backEndHistResponse.items;
-    // Gestion du scroll pour etre toujours en bas de la conversation
-    await tick();
-    msgDisplay.scrollTop = msgDisplay.scrollHeight;
-    isLoading = false;
-  }
-
   // DISPLAY MODAL SI PAS ID VALID AU LOGGIN
   async function handleLoggin() {
     if (localStorage.getItem("id") === null) {
       dialog.showModal();
     } else {
       // AFFICHAGE DES DONNES BACKEND
-      handleHistory();
+      //   handleHistory(); /////////////////////////////// < C'est ici que je devrais remettre la version HP du chat vierge non intégré pour le moment
+      handleChatHistory();
     }
   }
 
@@ -175,7 +163,6 @@
   let backEndHistoryChat = $state([]);
 
   async function handleChatHistory() {
-    isLoading = true;
     const historyCurrentChat = await fetch(
       "http://127.0.0.1:8090/api/collections/conv_history/records",
       {
@@ -187,14 +174,35 @@
     );
     const backEndChatResponse = await historyCurrentChat.json();
     backEndHistoryChat = backEndChatResponse.items;
-
-    isLoading = false;
   }
 
-  onMount(() => {
-    handleLoggin;
-    handleChatHistory;
-  });
+  // FONCTION POUR AFFICHER HISTORIQUE DU CHAT
+  async function handleHistory(id) {
+    isLoading = true;
+    const historyCurrentMsg = await fetch(
+      `http://127.0.0.1:8090/api/collections/chat_history/records`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const backEndHistResponse = await historyCurrentMsg.json();
+    backEndHistoryPrompt = [];
+    for (let item of backEndHistResponse.items) {
+      if (item.conv_relation === id) {
+        backEndHistoryPrompt.push(item);
+      }
+    }
+
+    // Gestion du scroll pour etre toujours en bas de la conversation
+    await tick();
+    msgDisplay.scrollTop = msgDisplay.scrollHeight;
+    isLoading = false;
+    return id;
+  }
+  onMount(handleLoggin);
 </script>
 
 <!--********************************** HTML PART **********************************-->
@@ -339,87 +347,25 @@
     >
   </section>
   <section id="history-content">
-    <article class="conv-card">
-      <button type="button" class="conv-menu-btn">
-        <h3>Lorem ipsum dolor...</h3>
-        <Icon
-          class="search-icon"
-          icon="gravity-ui:ellipsis"
-          width="1.5rem"
-          height="1.5rem"
-        />
-      </button>
-      <p class="responsive-hidden">
-        Explicabo nam officia in, illum ad quae. Id enim ut illum adipisci non
-        quibusdam sint animi obcaecati sed quas. Eveniet, in porro!
-      </p>
-      <time class="responsive-hidden" datetime="2026-01-12"
-        >12 janvier 2026</time
-      >
-    </article>
-
-    <article class="conv-card">
-      <button type="button" class="conv-menu-btn">
-        <h3>Lorem ipsum dolor...</h3>
-        <Icon
-          class="search-icon"
-          icon="gravity-ui:ellipsis"
-          width="1.5rem"
-          height="1.5rem"
-        />
-      </button>
-      <p class="responsive-hidden">
-        Explicabo nam officia in, illum ad quae. Id enim ut illum adipisci non
-        quibusdam sint animi obcaecati sed quas. Eveniet, in porro! Explicabo
-        nam officia in, illum ad quae. Id enim ut illum adipisci non quibusdam
-        sint animi obcaecati sed quas. Eveniet, in porro!
-      </p>
-      <time class="responsive-hidden" datetime="2026-01-12"
-        >12 janvier 2026</time
-      >
-    </article>
-
-    <article class="conv-card">
-      <button type="button" class="conv-menu-btn">
-        <h3>Lorem ipsum dolor...</h3>
-        <Icon
-          class="search-icon"
-          icon="gravity-ui:ellipsis"
-          width="1.5rem"
-          height="1.5rem"
-        />
-      </button>
-      <p class="responsive-hidden">
-        Explicabo nam officia in, illum ad quae. Id enim ut illum adipisci non
-        quibusdam sint animi obcaecati sed quas. Eveniet, in porro! Explicabo
-        nam officia in, illum ad quae. Id enim ut illum adipisci non quibusdam
-        sint animi obcaecati sed quas. Eveniet, in porro!
-      </p>
-      <time class="responsive-hidden" datetime="2026-01-12"
-        >12 janvier 2026</time
-      >
-    </article>
-
-    <article class="conv-card">
-      <button type="button" class="conv-menu-btn">
-        <h3>Lorem ipsum dolor...</h3>
-        <Icon
-          class="search-icon"
-          icon="gravity-ui:ellipsis"
-          width="1.5rem"
-          height="1.5rem"
-        />
-      </button>
-      <p class="responsive-hidden">
-        Explicabo nam officia in, illum ad quae. Id enim ut illum adipisci non
-        quibusdam sint animi obcaecati sed quas. Eveniet, in porro! Explicabo
-        nam officia in, illum ad quae. Id enim ut illum adipisci non quibusdam
-        sint animi obcaecati sed quas. Eveniet, in porro!
-      </p>
-      <time class="responsive-hidden" datetime="2026-01-12"
-        >12 janvier 2026</time
-      >
-    </article>
+    {#each backEndHistoryChat as chat}
+      <article class="conv-card">
+        <button
+          type="button"
+          class="conv-menu-btn"
+          onclick={() => {
+            handleHistory(chat.id);
+          }}
+        >
+          <h3>{chat.title}</h3>
+          <Icon
+            class="search-icon notWork"
+            icon="gravity-ui:ellipsis"
+            width="1.5rem"
+            height="1.5rem"
+          />
+        </button>
+      </article>
+    {/each}
   </section>
 </aside>
 

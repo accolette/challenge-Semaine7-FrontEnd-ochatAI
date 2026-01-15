@@ -170,7 +170,7 @@
 > Objectifs du J4 :
 * [X] Étape 1 : Mettre en place un système de conversations  <font color="green">
  (15min)</font>
-* [ ] Étape 2 : Mettre en place une sidebar pour gérer les conversations  <font color="green">
+* [X] Étape 2 : Mettre en place une sidebar pour gérer les conversations  <font color="green">
  (45min)</font>
 * [ ] Remttre le bouton new chat sur version mobile et tab  
 * [ ] Étape 3 : On fait fonctionner tout ça <font color="green">(2h)</font>  
