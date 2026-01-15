@@ -161,51 +161,74 @@
 
 
 ------------------
-
 ## Jour 4 : Système de conversations
 
 ### Todo List :
 
-* [X] Todo de la journée avec durées objectivées sur 6 h au total  
+* [x] Todo de la journée avec durées objectivées sur 6 h au total
+
 > Objectifs du J4 :
-* [X] Étape 1 : Mettre en place un système de conversations  <font color="green">
- (15min)</font>
-* [X] Étape 2 : Mettre en place une sidebar pour gérer les conversations  <font color="green">
- (45min)</font>
-* [ ] Remttre le bouton new chat sur version mobile et tab  
-* [X] Étape 3 : On fait fonctionner tout ça <font color="green">(2h)</font>  
-> Bonus J4 <font color="green">(1h30)</font>:
+
+* [x] Étape 1 : Mettre en place un système de conversations  <font color="green">
+  (15 min)</font>
+* [x] Étape 2 : Mettre en place une sidebar pour gérer les conversations  <font color="green">
+  (45 min)</font>
+* [x] Étape 3 : On fait fonctionner tout ça <font color="green">(2 h)</font>
+
+> Bonus J4 <font color="green">(1 h 30)</font>:
+
 * [ ] Bonus : Supprimer les conv
-* [ ] Bonus : Afficher masquer side bar
-* [ ] Bonus perso : Afficher le statut de pocketbase
-> Ce qui n'a pas été fait autres jours <font color="green">(1h30)</font>:
+* [ ] Bonus : Afficher / masquer la sidebar
+* [ ] Bonus perso : Afficher l'historique dans l'ordre déchronologique
+* [ ] Bonus perso : Afficher le statut de PocketBase
+
+> Ce qui n'a pas été fait les autres jours <font color="green">(1 h 30)</font>:
+
 * [ ] Menus cliquables
 * [ ] Revoir le style du bouton « nouveau chat »
-* [ ] Bonus : Dispatcher le fichier en composants  
-* [ ] Faire un "Entrée" au clavier qui soumet et qui ne renvoie pas à la ligne  
-* [ ] Rendre le lien de l'alter du modal cliquable  
-* [ ] Afficher l'heure d'envois des messages
-* [X] supprimer le contenu bas de pages inutile bas de page desktop
+* [ ] Bonus : Dispatcher le fichier en composants
+* [ ] Faire un "Entrée" au clavier qui soumet et qui ne renvoie pas à la ligne
+* [ ] Rendre le lien de l'alerte du modal cliquable
+* [ ] Afficher l'heure d'envoi des messages
+* [x] Supprimer le contenu inutile en bas de page desktop
+
 > Fin de journée :
-* [ ] Remplir le carnet de bord (15 min)
-* [ ] voir pour la manip npm run built pour créer un fichier lisible dans github page
-* [ ] Push la version du fichier pour le portfolio, avec readme et explication de comment créer sa clé API Mistral, c'est gratuit, etc.  
+
+* [ ] Cleaner le projet, ajouter des commentaires et, si le temps, supprimer les répétitions
+* [x] Remplir le carnet de bord (15 min)
+
+> Pour le portfolio à l'avenir :
+
+* [ ] Voir pour la manip `npm run build` pour créer un fichier lisible dans GitHub Pages
+* [ ] Push la version du fichier pour le portfolio, avec README et explication de comment créer sa clé API Mistral, c'est gratuit, etc.
 
 ### Bilan de fin de journée
+
 #### Ce que j'ai réussi à faire :
 
-* 
+* Survivre 🫠
+* De manière générale, réussir à faire toute la mise en place sans regarder les corrections. Je me suis acharnée à suivre ma logique. Je suis contente de m'y être retrouvée, bien que je m'y sois perdue de nombreuses fois tout de même !
+* Très contente d'avoir pu gérer l'affichage d'un chat de homepage qui ouvre ensuite sur une conversation.
 
 #### Ce que je n'ai pas réussi à faire :
 
-* 
+* Beaucoup de choses par manque de temps, mais sinon ce que j'avais tenté les précédents jours sans succès, à savoir :
+* Menus cliquables
+* Revoir le style du bouton « nouveau chat »
+* Faire un "Entrée" au clavier qui soumet et qui ne renvoie pas à la ligne
+* Rendre le lien de l'alerte du modal cliquable
 
 #### Les choix que j'ai faits :
-* 
+
+*
 
 #### Ce que tu referais différemment :
-* je me suis ententée a vouloir gérer à ma facon les conversation, la prochaine fois je suivreais les tips donnés 😅 en attendant j'ai tout de meme ressui à faire ce que je voulais. je suis curieuse de savoir si c'était pertinent ou non, si ma méthode est plus lourde qu'une autre manière de faire.
+
+* Je me suis entêtée à vouloir gérer à ma façon les conversations ; la prochaine fois, je suivrai les tips donnés 😅, puisque ça m'aurait sûrement permis d'aller plus vite. En attendant, j'ai tout de même réussi à faire ce que je voulais. Je suis curieuse de savoir si c'était pertinent ou non, si ma méthode est plus lourde qu'une autre manière de faire.
 
 #### Les prochaines étapes si tu avais eu plus de temps :
 
-* 
+* Faire l'option de suppression des conversations
+* Le filtrage des conv grâce à l'historique, mais là vraiment je manquais de temps sur le délai imparti
+* Ajouter l'heure d'envoi des messages : je pense que c'était jouable, mais je me suis focus sur d'autres choix plus longs à traiter
+* Cleaner mon projet !!!
