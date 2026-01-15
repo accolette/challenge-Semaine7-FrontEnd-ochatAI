@@ -1,4 +1,4 @@
-# CARNET DE BORD DU PROJET
+# CARNET DE BORD DU PROJET : O'CHAT AI
 
 ## Jour 1 : Wireframe et intégration HTML/CSS dans Svelte
 
@@ -8,10 +8,13 @@
 * [x] Faire une pige de style
 * [x] Prépa du fichier pour portfolio
 * [x] Relire le cahier des charges
-* [x] Créer le wireframe (max 1h30)
-* [x] Mettre en place le projet Svelte (30 min)
-* [x] Intégrer l'UI en mobile first (4h)
-* [ ] Push version du fichier pour le portfolio
+* [x] Créer le wireframe  <font color="green">
+ (max 1h30)</font>
+* [x] Mettre en place le projet Svelte  <font color="green">
+ (30 min)</font>
+* [x] Intégrer l'UI en mobile first  <font color="green">
+(4h)</font> 
+
 
 ### Bilan de fin de journée
 #### Ce que je n'ai pas réussi à faire :
@@ -44,7 +47,8 @@
 ### Todo List :
 
 * [x] Todo de la journée avec durées objectivées sur 6 h au total
-* [ ] Finir d'intégrer l'UI en mobile first (1 h 15)  
+* [ ] Finir d'intégrer l'UI en mobile first  <font color="green">
+(1 h 15)  </font> 
 > Sous-tâches sur l'intégration :
 * [x] Favicon
 * [x] Intégration partie chat
@@ -54,15 +58,19 @@
 * [ ] Bonus : Dispatcher le fichier en composants   
 > Puis :
 * [x] Mettre le token dans un fichier dédié et faire immédiatement un .gitignore dessus
-* [x] Étape 2 : Lier l'API à Mistral AI (1 h 30)
+* [x] Étape 2 : Lier l'API à Mistral AI  <font color="green">
+ (1 h 30)</font>
 * [x] Gérer les réponses et erreurs éventuelles
-* [x] Étape 3 : Gérer un affichage différencié entre user et IA (1 h 30)
+* [x] Étape 3 : Gérer un affichage différencié entre user et IA  <font color="green">
+ (1 h 30)</font>
 * [x] Nettoyer le système de tableau — étape 3
 * [x] Reset du champ de saisie
-* [X] Étape 4 : Sécuriser le token Mistral (1 h)
-* [ ] Bonus : usage eMarkdown (30 min)
-* [X] Remplir le carnet de bord (15 min)
-* [ ] Push la version du fichier pour le portfolio
+* [X] Étape 4 : Sécuriser le token Mistral <font color="green">
+ (1 h)</font>
+* [ ] Bonus : usage eMarkdown  <font color="green">
+ (30 min)</font>
+* [X] Remplir le carnet de bord  <font color="green">
+ (15 min)</font>
 
 ### Bilan de fin de journée
 #### Ce que j'ai réussi à faire :
@@ -98,7 +106,8 @@
 
 * [x] Todo de la journée avec durées objectivées sur 6 h au total
 
-> Ce qui n'a pas été fait du J2 : (2h)
+> Ce qui n'a pas été fait du J2 :  <font color="green">
+ (3h)</font>
 
 * [x] Bonus : usage eMarkdown
 * [x] Remettre le fichier state clean mais en full commentaires
@@ -110,13 +119,15 @@
 
 > Objectifs du J3 :
 
-* [x] Étape 1 : Mettre en place un backend Pocketbase (15 min)
-* [x] Étape 2 : Mettre en place les requêtes d'enregistrement (2h)
-* [x] Étape 3 : Différencier les messages IA et humain (1h30)
-* [X] Remplir le carnet de bord (15 min)
-* [ ] Push la version du fichier pour le portfolio, avec readme et explication de comment créer sa clé API Mistral, c'est gratuit, etc.
-
-> Ce qui n'a pas été fait du J1 (intégration mobile first) :
+* [x] Étape 1 : Mettre en place un backend Pocketbase  <font color="green">
+(15 min)</font> 
+* [x] Étape 2 : Mettre en place les requêtes d'enregistrement  <font color="green">
+ (2h)</font>
+* [x] Étape 3 : Différencier les messages IA et humain (--)
+* [X] Remplir le carnet de bord  <font color="green">
+ (15 min)</font>  
+> Ce qui n'a pas été fait du J1  <font color="green">
+ (30 min) </font>:
 
 * [ ] Menus cliquables
 * [ ] Revoir le style du bouton « nouveau chat »
@@ -146,3 +157,55 @@
 #### Les prochaines étapes si tu avais eu plus de temps :
 
 * Ce qui reste dans la todo list de non cochée !
+
+
+
+------------------
+
+## Jour 4 : Système de conversations
+
+### Todo List :
+
+* [X] Todo de la journée avec durées objectivées sur 6 h au total  
+> Objectifs du J4 :
+* [X] Étape 1 : Mettre en place un système de conversations  <font color="green">
+ (15min)</font>
+* [ ] Étape 2 : Mettre en place une sidebar pour gérer les conversations  <font color="green">
+ (45min)</font>
+* [ ] Remttre le bouton new chat sur version mobile et tab  
+* [ ] Étape 3 : On fait fonctionner tout ça <font color="green">(2h)</font>  
+> Bonus J4 <font color="green">(1h30)</font>:
+* [ ] Bonus : Supprimer les conv
+* [ ] Bonus : Afficher masquer side bar
+* [ ] Bonus perso : Afficher le statut de pocketbase
+> Ce qui n'a pas été fait autres jours <font color="green">(1h30)</font>:
+* [ ] Menus cliquables
+* [ ] Revoir le style du bouton « nouveau chat »
+* [ ] Bonus : Dispatcher le fichier en composants  
+* [ ] Faire un "Entrée" au clavier qui soumet et qui ne renvoie pas à la ligne  
+* [ ] Rendre le lien de l'alter du modal cliquable  
+* [ ] Afficher l'heure d'envois des messages
+* [X] supprimer le contenu bas de pages inutile bas de page desktop
+> Fin de journée :
+* [ ] Remplir le carnet de bord (15 min)
+* [ ] voir pour la manip npm run built pour créer un fichier lisible dans github page
+* [ ] Push la version du fichier pour le portfolio, avec readme et explication de comment créer sa clé API Mistral, c'est gratuit, etc.  
+
+### Bilan de fin de journée
+#### Ce que j'ai réussi à faire :
+
+* 
+
+#### Ce que je n'ai pas réussi à faire :
+
+* 
+
+#### Les choix que j'ai faits :
+* 
+
+#### Ce que tu referais différemment :
+*
+
+#### Les prochaines étapes si tu avais eu plus de temps :
+
+* 

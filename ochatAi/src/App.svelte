@@ -66,7 +66,7 @@
     );
     userPrompt = "";
 
-    // STOCKAGE REEPONSE IA EN BACKEND
+    // STOCKAGE REPONSE IA EN BACKEND
     const saveAitMsg = await fetch(
       "http://127.0.0.1:8090/api/collections/chat_history/records",
       {
@@ -145,7 +145,56 @@
     }
   }
 
-  onMount(handleLoggin);
+  // FONCTION NEW CHAT
+  let subjetcNewChat = $state();
+  async function createNewChat(e) {
+    e.preventDefault();
+    if (localStorage.getItem("id") === null) {
+      dialog.showModal();
+    } else {
+      const newChat = await fetch(
+        "http://127.0.0.1:8090/api/collections/conv_history/records",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: "",
+            title: subjetcNewChat,
+          }),
+        }
+      );
+      const response = await newChat.json();
+      console.log(response);
+      subjetcNewChat = "";
+    }
+  }
+
+  // AFFICHAGE DES CONVESRATION EN MEMOIRE
+  let backEndHistoryChat = $state([]);
+
+  async function handleChatHistory() {
+    isLoading = true;
+    const historyCurrentChat = await fetch(
+      "http://127.0.0.1:8090/api/collections/conv_history/records",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const backEndChatResponse = await historyCurrentChat.json();
+    backEndHistoryChat = backEndChatResponse.items;
+
+    isLoading = false;
+  }
+
+  onMount(() => {
+    handleLoggin;
+    handleChatHistory;
+  });
 </script>
 
 <!--********************************** HTML PART **********************************-->
@@ -153,11 +202,11 @@
 
 <header>
   <nav>
-    <button type="button">
+    <button type="button" class="notWork">
       <Icon icon="gravity-ui:arrow-left-to-line" width="1rem" height="1rem" />
       <span class="responsive-hidden">Reduire</span>
     </button>
-    <button type="button">
+    <button type="button" class="notWork">
       <Icon icon="gravity-ui:person-gear" width="1rem" height="1rem" />
       <span class="responsive-hidden">Profil & Réglages</span>
     </button>
@@ -254,16 +303,32 @@
 
 <aside>
   <section id="conv-nav" class="responsive-hidden">
-    <button type="button">
-      <Icon icon="gravity-ui:plus" width="1rem" height="1rem" />
-      Nouveau Chat</button
-    >
+    <form onsubmit={createNewChat}>
+      <label for="subjectNewChat"></label>
+      <input
+        type="text"
+        name=""
+        id="subjectNewChat"
+        placeholder="Sujet du nouveau Chat"
+        bind:value={subjetcNewChat}
+      />
+      <button type="button">
+        <Icon icon="gravity-ui:plus" width="1rem" height="1rem" />
+        Nouveau Chat</button
+      >
+    </form>
   </section>
-  <section id="history-nav">
+  <section id="history-nav" class="notWork">
     <h2>Historique</h2>
     <label class="history-search">
-      <input type="text" name="" id="history-search" placeholder="Rechercher" />
-      <button type="button" class="search-btn"
+      <input
+        type="text"
+        name=""
+        id="history-search"
+        placeholder="Rechercher"
+        class="notWork"
+      />
+      <button type="button" class="search-btn notWork"
         ><Icon
           class="search-icon"
           icon="gravity-ui:magnifier"
@@ -513,6 +578,7 @@
     flex-direction: column;
     padding: 1rem 0;
     gap: 0.5rem;
+    overflow: scroll;
   }
 
   .conv-card {
@@ -584,7 +650,26 @@
       position: absolute;
       top: 2.5rem;
       width: 20vw;
-      overflow: scroll;
+      height: 100vh;
+      background-color: var(--bgcolor);
+      display: block;
+    }
+
+    aside section {
+      position: absolute;
+    }
+
+    #conv-nav {
+      top: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: solid rgb(180, 180, 180) 1px;
+    }
+
+    #conv-nav form {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
     }
 
     #conv-nav button {
@@ -597,11 +682,16 @@
     }
 
     #history-nav {
-      margin: 1rem 0;
-      padding: 1rem 0;
+      top: 12.5rem;
+      position: relative;
+      margin: 5rem 0;
+      padding: 2rem 0;
       display: initial;
       height: 8rem;
       width: 100%;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
     }
 
     #history-search {
@@ -609,8 +699,8 @@
     }
 
     #history-content {
-      width: 100%;
-      height: 100vh;
+      top: 19.5rem;
+      width: 97%;
       display: flex;
       flex-direction: column;
     }
@@ -620,6 +710,7 @@
     }
 
     .conv-card {
+      width: 90%;
       h3 {
         max-height: 2rem;
         overflow: hidden;

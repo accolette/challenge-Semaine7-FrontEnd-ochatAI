@@ -65,6 +65,10 @@ textarea {
   background: none;
 }
 
+.notWork {
+  cursor: not-allowed;
+}
+
 /* *************************** HEADER PART *************************** */
 header {
   background-color: var(--bgcolor);
