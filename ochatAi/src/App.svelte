@@ -177,6 +177,7 @@
       const response = await newChat.json();
       console.log(response);
       handleHistory(response.id);
+      handleChatHistory();
 
       //ENVOI D4UN MSG VIDE
       const createAitMsg = await fetch(
@@ -267,19 +268,21 @@
 <!--*************** MAIN PART ***************-->
 
 <main>
-  <!-- TODO A VOIR PLUS TARD COMMENT GERER AFFICHAGE BLOC WELCOME -->
+  <!--****** HOMEPAGE DU CHAT ******-->
+
   <section class="bloc-welcome hidden" class:hidden={notHidden}>
     <h1>
       Commence une conversation avec
       <em>O'Chat AI</em>
       <Icon icon="gravity-ui:geo-fill" id="appIcon" />
     </h1>
-    <form action="">
+    <form action="" onsubmit={createNewChat}>
       <label for="ask-question-hp"></label>
       <textarea
         name=""
         id="ask-question-hp"
         placeholder="Nomme cette nouvelle conversation"
+        bind:value={subjetcNewChat}
       ></textarea>
       <button type="submit">Envoyer</button>
     </form>
