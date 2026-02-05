@@ -1,3 +1,4 @@
-elementsOclock/*
+elementsOclock
 .DS_Store*
 state.svelte.js
+node_modules
