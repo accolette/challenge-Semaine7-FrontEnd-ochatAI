@@ -1,4 +1,4 @@
 elementsOclock
 .DS_Store*
 state.svelte.js
-node_modules
+node_modules/
