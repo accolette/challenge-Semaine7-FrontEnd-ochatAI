@@ -181,6 +181,8 @@
 * [ ] Bonus : Afficher / masquer la sidebar
 * [ ] Bonus perso : Afficher l'historique dans l'ordre déchronologique
 * [ ] Bonus perso : Afficher le statut de PocketBase
+* [ ] Faire une couleur pour le bouton qui représente la conversation active.
+
 
 > Ce qui n'a pas été fait les autres jours <font color="green">(1 h 30)</font>:
 
@@ -199,8 +201,7 @@
 
 > Pour le portfolio à l'avenir :
 
-* [ ] Voir pour la manip `npm run build` pour créer un fichier lisible dans GitHub Pages
-* [ ] Push la version du fichier pour le portfolio, avec README et explication de comment créer sa clé API Mistral, c'est gratuit, etc.
+* [X] Push la version du fichier pour le portfolio, avec README et explication de comment créer sa clé API Mistral, c'est gratuit, etc.
 
 ### Bilan de fin de journée
 

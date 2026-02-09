@@ -1,6 +1,6 @@
 # O'Chat — Chatbot AI avec Svelte & Pocketbase
 
-Projet réalisé en **autonomie et solo sur 4 jours**, dans le cadre d’un challenge guidé au quotidien avec des énoncés et un carnet de bord pour suivre l’avancement.
+Projet réalisé en **autonomie et solo sur 4 jours** lors de la semaine 7/36 de la formation, dans le cadre d’un challenge guidé au quotidien avec des énoncés et un carnet de bord pour suivre l’avancement.
 
 L’objectif du projet était de créer une **application de chat fonctionnelle**, capable de communiquer avec une IA (Mistral AI), de stocker les messages et de gérer plusieurs conversations.
 
@@ -14,7 +14,6 @@ L’objectif du projet était de créer une **application de chat fonctionnelle*
 - Gestion de plusieurs conversations avec une sidebar  
 - Projet réalisé en autonomie sur 4 jours  
 
-[🎯 Voir le résultat (A venir)](#)  
 [📝 Consulter le carnet de bord](./CarnetDeBordDuProjet.md)
 
 ---
@@ -26,6 +25,12 @@ L’objectif du projet était de créer une **application de chat fonctionnelle*
 - Historique des conversations stocké et récupéré côté serveur  
 - Gestion de plusieurs conversations cloisonnées  
 - Responsive design, mobile-first  
+
+---
+
+## 🎬 Démo
+
+![Demo O'ChatAI](./ressources/demo-ochatAI.gif)
 
 ---
 
@@ -49,7 +54,7 @@ L’objectif du projet était de créer une **application de chat fonctionnelle*
 
 # O'Chat — AI Chatbot with Svelte & Pocketbase
 
-Project developed solo over **4 days**, following guided daily challenges with detailed logging of progress.
+Project developed solo over **4 days** during week 7 of the 36-week training program, following guided daily challenges with detailed logging of progress.
 
 The goal was to build a **functional chat application**, able to communicate with an AI (Mistral AI), persist messages, and handle multiple conversations.
 
@@ -75,6 +80,12 @@ The goal was to build a **functional chat application**, able to communicate wit
 - Stored chat history retrieved from backend  
 - Handling multiple isolated conversations  
 - Mobile-first responsive design  
+
+---
+
+## 🎬 Demo
+
+![Demo O'ChatAI](./ressources/demo-ochatAI.gif)
 
 ---
 

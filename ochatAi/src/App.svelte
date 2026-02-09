@@ -1,13 +1,11 @@
 <!--********************************** SCRIPT PART **********************************-->
 <script>
-  // Import des icônes
+  // Import des icônes / Icon import
   import Icon from "@iconify/svelte";
-  // Import clés API temporaire :
-  // import { apiKey } from "./state.svelte.js";
   import { onMount } from "svelte";
-  // Import style makdown
+  // Import du style Markdown / Markdown style import
   import Markdown from "svelte-exmarkdown";
-  // Import pour gestion du scroll
+  // Import pour la gestion du scroll / Import for scroll management
   import { tick } from "svelte";
 
   // VARIABLES
@@ -21,10 +19,10 @@
   let backEndHistoryChat = $state([]);
   let convActuelle = $state();
 
-  // AFFICHAGE DES DONNES BACKEND DANS CHAT
+  // AFFICHAGE DES DONNÉES BACKEND DANS LE CHAT / DISPLAY BACKEND DATA IN CHAT
   handleHistory();
 
-  // ENVOI DES PROMPT
+  // PROMPT SENDING
   const handleSentPrompt = async (e) => {
     e.preventDefault();
 
@@ -34,15 +32,13 @@
 
     isLoading = true;
 
-    // CONTROL ID  USER ET ENVOI DU PROMPT A MISTRAL
+    // CONTRÔLE DE L’ID UTILISATEUR ET ENVOI DU PROMPT À MISTRAL / USER ID CHECK AND PROMPT SENDING TO MISTRAL
     userLog = localStorage.getItem("id");
     const msg = await fetch("https://api.mistral.ai/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        // Authorization: `Bearer ${apiKey.id}`,
-        // Ci dessus la version initiale avant usage du local storage
         Authorization: `Bearer ${userLog}`,
       },
       body: JSON.stringify({
@@ -55,15 +51,14 @@
         model: "mistral-large-latest",
       }),
     });
-    // VERIFICATION ID OK
+    // VÉRIFICATION DE L’ID / ID VERIFICATION
     const response = await msg.json();
     if (response.detail === "Unauthorized") {
       dialog.showModal();
     }
     const aiResponse = response.choices[0].message.content;
 
-    // STOCKAGE PROMPT EN BACKEND
-
+    // STOCKAGE DU PROMPT EN BACKEND / PROMPT STORAGE IN BACKEND
     const saveCurrentMsg = await fetch(
       "http://127.0.0.1:8090/api/collections/chat_history/records",
       {
@@ -76,7 +71,7 @@
           role: "user",
           conv_relation: convActuelle,
         }),
-      }
+      },
     );
     const responsPrompt = await saveCurrentMsg.json();
 
@@ -84,7 +79,7 @@
 
     userPrompt = "";
 
-    // STOCKAGE REPONSE IA EN BACKEND
+    // STOCKAGE DE LA RÉPONSE IA EN BACKEND / AI RESPONSE STORAGE IN BACKEND
     const saveAitMsg = await fetch(
       "http://127.0.0.1:8090/api/collections/chat_history/records",
       {
@@ -97,27 +92,27 @@
           role: "O'Chat",
           conv_relation: convActuelle,
         }),
-      }
+      },
     );
     const responsAi = await saveAitMsg.json();
     backEndHistoryPrompt.push(responsAi);
     isLoading = false;
 
-    // Gestion du scroll pour etre toujours en bas de la conversation
+    // Gestion du scroll pour être toujours en bas de la conversation / Scroll management to always stay at the bottom of the conversation
     await tick();
     msgDisplay.scrollTop = msgDisplay.scrollHeight;
     isLoading = false;
     return id;
   };
 
-  // MODAL DU LOG INITIAL
+  // MODAL DE LOGIN INITIAL / INITIAL LOGIN MODAL
   let dialog = $state();
   let userToken = $state("");
 
   const handleSumbmit = async (e) => {
     e.preventDefault();
     localStorage.setItem("id", userToken);
-    // Gestion de l'ID de l'utilisateur
+    // Gestion de l’ID de l’utilisateur / User ID management
     userLog = localStorage.getItem("id");
     const msg = await fetch("https://api.mistral.ai/v1/chat/completions", {
       method: "GET",
@@ -131,7 +126,7 @@
     if (response.detail === "Unauthorized") {
       localStorage.removeItem("id");
       alert(
-        `Clé non valide, créez en une, c'est gratuit! \n\nPlus d'infos sur : shttps://docs.mistral.ai/getting-started/quickstart`
+        `Clé non valide, créez en une, c'est gratuit! \n\nPlus d'infos sur : shttps://docs.mistral.ai/getting-started/quickstart`,
       );
       userToken = "";
     } else {
@@ -140,20 +135,19 @@
     }
   };
 
-  // DISPLAY MODAL SI PAS ID VALID AU LOGGIN
+  // AFFICHAGE DU MODAL SI L’ID N’EST PAS VALIDE AU LOGIN / DISPLAY MODAL IF ID IS NOT VALID AT LOGIN
   async function handleLoggin() {
     if (localStorage.getItem("id") === null) {
       dialog.showModal();
     } else {
-      // AFFICHAGE DES DONNES BACKEND
-      //   handleHistory(); /////////////////////////////// < C'est ici que je devrais remettre la version HP du chat vierge non intégré pour le moment
+      // AFFICHAGE DES DONNÉES BACKEND / DISPLAY BACKEND DATA
       handleChatHistory();
       isHidden = true;
       notHidden = false;
     }
   }
 
-  // FONCTION NEW CHAT
+  // FONCTION NEW CHAT / NEW CHAT FUNCTION
   let subjetcNewChat = $state();
   async function createNewChat(e) {
     e.preventDefault();
@@ -172,14 +166,15 @@
             id: "",
             title: subjetcNewChat,
           }),
-        }
+        },
       );
       const response = await newChat.json();
       console.log(response);
       handleHistory(response.id);
       handleChatHistory();
+      subjetcNewChat = "";
 
-      //ENVOI D4UN MSG VIDE
+      // ENVOI D’UN MESSAGE VIDE / EMPTY MESSAGE SENDING
       const createAitMsg = await fetch(
         "http://127.0.0.1:8090/api/collections/chat_history/records",
         {
@@ -192,14 +187,14 @@
             role: "O'Chat",
             conv_relation: response.id,
           }),
-        }
+        },
       );
       const responsAi = await createAitMsg.json();
       backEndHistoryPrompt.push(responsAi);
     }
   }
 
-  // AFFICHAGE DES CONVESRATION EN MEMOIRE
+  // AFFICHAGE DES CONVERSATIONS EN MÉMOIRE / DISPLAY STORED CONVERSATIONS
   async function handleChatHistory() {
     const historyCurrentChat = await fetch(
       "http://127.0.0.1:8090/api/collections/conv_history/records",
@@ -208,16 +203,16 @@
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      },
     );
     const backEndChatResponse = await historyCurrentChat.json();
     backEndHistoryChat = backEndChatResponse.items;
   }
 
-  // FONCTION POUR AFFICHER HISTORIQUE DU CHAT
+  // FONCTION POUR AFFICHER L’HISTORIQUE DU CHAT / FUNCTION TO DISPLAY CHAT HISTORY
   async function handleHistory(id) {
     isLoading = true;
-    // Affiche la vue conversation et masque la Homepage
+    // Affiche la vue conversation et masque la homepage / Display conversation view and hide homepage
     isHidden = false;
     notHidden = true;
 
@@ -228,7 +223,7 @@
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      },
     );
     const backEndHistResponse = await historyCurrentMsg.json();
     console.log("vue des donée", backEndHistResponse);
@@ -239,7 +234,7 @@
       }
     }
 
-    // Gestion du scroll pour etre toujours en bas de la conversation
+    // Gestion du scroll pour être toujours en bas de la conversation / Scroll management to always stay at the bottom of the conversation
     await tick();
     msgDisplay.scrollTop = msgDisplay.scrollHeight;
     isLoading = false;
@@ -268,7 +263,7 @@
 <!--*************** MAIN PART ***************-->
 
 <main>
-  <!--****** HOMEPAGE DU CHAT ******-->
+  <!--****** CHAT HOMEPAGE ******-->
 
   <section class="bloc-welcome hidden" class:hidden={notHidden}>
     <h1>
@@ -288,7 +283,7 @@
     </form>
   </section>
 
-  <!--****** MODAL DE LOGIN ******-->
+  <!--****** LOGIN MODAL ******-->
 
   <dialog bind:this={dialog}>
     <form action="" onsubmit={handleSumbmit}>
@@ -306,7 +301,7 @@
     </form>
   </dialog>
 
-  <!--****** HISTORY CHAT ******-->
+  <!--****** CHAT HISTORY ******-->
 
   <section class="chat-section" bind:this={msgDisplay}>
     {#each backEndHistoryPrompt as message}
